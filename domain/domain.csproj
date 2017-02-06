@@ -43,7 +43,7 @@
     <Compile Include="Person.cs" />
     <Compile Include="Events\PersonBornEvent.cs" />
     <Compile Include="Events\PersonNamedEvent.cs" />
-    <Compile Include="Events\PersonStartedEductionEvent.cs" />
+    <Compile Include="Events\PersonStartedEducationEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplyTests.cs" />
+    <Compile Include="CommandTests.cs" />
     <Compile Include="LoadFromTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

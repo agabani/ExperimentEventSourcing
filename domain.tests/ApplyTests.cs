@@ -25,7 +25,7 @@ namespace domain.tests
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
             // Nursary
-            person.Apply(new PersonStartedEductionEvent("Evan Davis Nursary", new DateTime(1993, 9, 6)));
+            person.Apply(new PersonStartedEducationEvent("Evan Davis Nursary", new DateTime(1993, 9, 6)));
             var education = person.EducationalHistory.Single(e => e.InstitutionName == "Evan Davis Nursary");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1993, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
@@ -36,7 +36,7 @@ namespace domain.tests
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(1995, 7, 31)));
 
             // Primary School
-            person.Apply(new PersonStartedEductionEvent("Harlesden Primary School", new DateTime(1995, 9, 6)));
+            person.Apply(new PersonStartedEducationEvent("Harlesden Primary School", new DateTime(1995, 9, 6)));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Harlesden Primary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1995, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
@@ -47,7 +47,7 @@ namespace domain.tests
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2002, 7, 31)));
 
             // Secondary School
-            person.Apply(new PersonStartedEductionEvent("Preston Manor Secondary School", new DateTime(2002, 9, 6)));
+            person.Apply(new PersonStartedEducationEvent("Preston Manor Secondary School", new DateTime(2002, 9, 6)));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor Secondary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2002, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
@@ -68,7 +68,7 @@ namespace domain.tests
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2007, 7, 31)));
 
             // 6th Form
-            person.Apply(new PersonStartedEductionEvent("Preston Manor 6th Form", new DateTime(2007, 9, 6)));
+            person.Apply(new PersonStartedEducationEvent("Preston Manor 6th Form", new DateTime(2007, 9, 6)));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor 6th Form");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2007, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
@@ -79,7 +79,7 @@ namespace domain.tests
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2009, 7, 31)));
 
             // University
-            person.Apply(new PersonStartedEductionEvent("University of Bristol", new DateTime(2009, 9, 6)));
+            person.Apply(new PersonStartedEducationEvent("University of Bristol", new DateTime(2009, 9, 6)));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "University of Bristol");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2009, 9, 6)));
             Assert.That(education.EndDate, Is.Null);

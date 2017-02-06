@@ -35,6 +35,14 @@ namespace domain
 
     public partial class Person
     {
+        public Event ChangeName(string firstName, string lastName, DateTime when)
+        {
+            return new PersonNamedEvent(firstName, lastName, when);
+        }
+    }
+
+    public partial class Person
+    {
         private static readonly IReadOnlyDictionary<Type, Action<Person, Event>> Actions;
 
         static Person()
@@ -43,7 +51,7 @@ namespace domain
             {
                 {typeof(PersonBornEvent), PersonBornEvent},
                 {typeof(PersonNamedEvent), PersonNamedEvent},
-                {typeof(PersonStartedEductionEvent), PersonStartedEducationEvent},
+                {typeof(PersonStartedEducationEvent), PersonStartedEducationEvent},
                 {typeof(PersonFinishedEducationEvent), PersonFinishedEducationEvent},
                 {typeof(PersonStartedExperienceEvent), PersonStartedExperienceEvent},
                 {typeof(PersonFinishedExperienceEvent), PersonFinishedExperienceEvent}
@@ -66,7 +74,7 @@ namespace domain
 
         private static void PersonStartedEducationEvent(Person person, Event @event)
         {
-            var personStartedEductionEvent = (PersonStartedEductionEvent) @event;
+            var personStartedEductionEvent = (PersonStartedEducationEvent) @event;
             person.EducationalHistory.Add(new Education
             {
                 InstitutionName = personStartedEductionEvent.InstitutionName,

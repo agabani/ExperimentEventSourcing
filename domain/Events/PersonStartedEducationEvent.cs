@@ -2,9 +2,9 @@
 
 namespace domain.Events
 {
-    public class PersonStartedEductionEvent : Event
+    public class PersonStartedEducationEvent : Event
     {
-        public PersonStartedEductionEvent(string institutionName, DateTime when)
+        public PersonStartedEducationEvent(string institutionName, DateTime when)
             : base(when)
         {
             InstitutionName = institutionName;
