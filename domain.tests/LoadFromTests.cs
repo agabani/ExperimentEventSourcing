@@ -38,11 +38,7 @@ namespace domain.tests
                 new PersonStartedExperienceEvent("Capital One", "Software Engineer", new DateTime(2016, 07, 25))
             };
 
-            var handler = new PersonHandler();
-
-            handler.LoadFrom(events);
-
-            var person = handler.Person;
+            var person = Person.LoadFrom(events);
 
             var education = person.EducationalHistory.Single(e => e.InstitutionName == "Evan Davis Nursary");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1993, 9, 6)));

@@ -7,12 +7,6 @@ namespace domain.Handlers
 {
     public class PersonHandler
     {
-        private static readonly Dictionary<Type, Action<Event, Person>> Actions = new Dictionary<Type, Action<Event, Person>>();
-
-        static PersonHandler()
-        {
-            Actions.Add(typeof(PersonBornEvent), (@event, person) => { });
-        }
 
         public Person Person { get; private set; }
 
@@ -63,13 +57,6 @@ namespace domain.Handlers
             Person.ExperienceHistory
                 .Single(e => e.InstitutionName == @event.InstitutionName && e.Title == @event.Title && e.EndDate == null)
                 .EndDate = @event.When;
-        }
-
-        public void LoadFrom(List<Event> events)
-        {
-            foreach (var @event in events.OrderBy(e => e.When))
-            {
-            }
         }
     }
 }
