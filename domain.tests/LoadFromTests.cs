@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using domain.Events;
-using domain.Handlers;
 using NUnit.Framework;
 
 namespace domain.tests

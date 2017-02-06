@@ -44,7 +44,6 @@
     <Compile Include="Events\PersonBornEvent.cs" />
     <Compile Include="Events\PersonNamedEvent.cs" />
     <Compile Include="Events\PersonStartedEductionEvent.cs" />
-    <Compile Include="Handlers\PersonHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
