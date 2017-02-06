@@ -1,13 +1,23 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using domain.Events;
 
 namespace domain.Handlers
 {
     public class PersonHandler
     {
+        private static readonly Dictionary<Type, Action<Event, Person>> Actions = new Dictionary<Type, Action<Event, Person>>();
+
+        static PersonHandler()
+        {
+            Actions.Add(typeof(PersonBornEvent), (@event, person) => { });
+        }
+
         public Person Person { get; private set; }
 
-        public void Handle(PersonBornEvent @event)
+
+        public void Apply(PersonBornEvent @event)
         {
             Person = new Person
             {
@@ -16,13 +26,13 @@ namespace domain.Handlers
             };
         }
 
-        public void Handle(PersonNamedEvent @event)
+        public void Apply(PersonNamedEvent @event)
         {
             Person.FirstName = @event.FirstName;
             Person.LastName = @event.LastName;
         }
 
-        public void Handle(PersonStartedEductionEvent @event)
+        public void Apply(PersonStartedEductionEvent @event)
         {
             Person.EducationalHistory.Add(new Education
             {
@@ -31,14 +41,14 @@ namespace domain.Handlers
             });
         }
 
-        public void Handle(PersonFinishedEducationEvent @event)
+        public void Apply(PersonFinishedEducationEvent @event)
         {
             Person.EducationalHistory
                 .Single(e => e.InstitutionName == @event.InstitutionName && e.EndDate == null)
                 .EndDate = @event.When;
         }
 
-        public void Handle(PersonStartedExperienceEvent @event)
+        public void Apply(PersonStartedExperienceEvent @event)
         {
             Person.ExperienceHistory.Add(new Experience
             {
@@ -48,11 +58,18 @@ namespace domain.Handlers
             });
         }
 
-        public void Handle(PersonFinishedExperienceEvent @event)
+        public void Apply(PersonFinishedExperienceEvent @event)
         {
             Person.ExperienceHistory
                 .Single(e => e.InstitutionName == @event.InstitutionName && e.Title == @event.Title && e.EndDate == null)
                 .EndDate = @event.When;
+        }
+
+        public void LoadFrom(List<Event> events)
+        {
+            foreach (var @event in events.OrderBy(e => e.When))
+            {
+            }
         }
     }
 }
