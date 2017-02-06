@@ -7,12 +7,12 @@ namespace domain
 {
     public partial class Person
     {
-        public Gender Gender { set; get; }
-        public DateTime DateOfBirth { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public List<Education> EducationalHistory { get; set; } = new List<Education>();
-        public List<Experience> ExperienceHistory { get; set; } = new List<Experience>();
+        public Gender Gender { get; private set; }
+        public DateTime DateOfBirth { get; private set; }
+        public string FirstName { get; private set; }
+        public string LastName { get; private set; }
+        public List<Education> EducationalHistory { get; } = new List<Education>();
+        public List<Experience> ExperienceHistory { get; } = new List<Experience>();
     }
 
     public partial class Person
