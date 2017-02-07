@@ -28,7 +28,7 @@ namespace domain.Infrastructure
         protected static void ValidateVersion(VersionedEventSourced source, VersionedCommand command)
         {
             if (command.Version != source.Version)
-                throw new InvalidOperationException($"Expected version {source.Version} but was version {command.Version}");
+                throw new InvalidOperationException($"Expected command version {source.Version} but was {command.Version}.");
         }
     }
 }
