@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using domain.Commands;
 using domain.Events;
 
 namespace domain
@@ -17,9 +18,13 @@ namespace domain
 
     public partial class Person
     {
-        public Event ChangeName(string firstName, string lastName, DateTime when)
+        public IEnumerable<Event> Execute(ChangeNameCommand command)
         {
-            return new PersonNamedEvent(firstName, lastName, when);
+            Func<DateTime, DateTime> eighteen = dateOfBirth => new DateTime(dateOfBirth.Year + 18, dateOfBirth.Month, dateOfBirth.Day);
+
+            return DateTime.UtcNow > eighteen(DateOfBirth)
+                ? (IEnumerable<Event>) new[] {new PersonNamedEvent(command.FirstName, command.LastName, command.When)}
+                : new List<Event>();
         }
     }
 

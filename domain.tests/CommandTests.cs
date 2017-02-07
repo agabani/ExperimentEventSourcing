@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using domain.Commands;
 using domain.Events;
 using NUnit.Framework;
 
@@ -19,7 +21,8 @@ namespace domain.tests
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
-            var @event = (PersonNamedEvent) person.ChangeName("Amjed", "Agabani", new DateTime(1998, 3, 24));
+            var command = new ChangeNameCommand("Amjed", "Agabani", new DateTime(1998, 3, 24));
+            var @event = (PersonNamedEvent) person.Execute(command).Single();
 
             Assert.That(@event.FirstName, Is.EqualTo("Amjed"));
             Assert.That(@event.LastName, Is.EqualTo("Agabani"));

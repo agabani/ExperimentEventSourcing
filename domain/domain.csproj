@@ -34,6 +34,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ChangeNameCommand.cs" />
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Education.cs" />
     <Compile Include="EventSourced.cs" />
     <Compile Include="Events\Event.cs" />

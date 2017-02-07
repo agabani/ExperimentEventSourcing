@@ -2,7 +2,7 @@
 
 namespace domain.Events
 {
-    public class Event
+    public abstract class Event
     {
         protected Event(DateTime when)
         {
