@@ -35,14 +35,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ChangeNameCommand.cs" />
-    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Infrastructure\Command.cs" />
     <Compile Include="Education.cs" />
-    <Compile Include="EventSourced.cs" />
-    <Compile Include="Events\Event.cs" />
+    <Compile Include="Infrastructure\EventSourced.cs" />
+    <Compile Include="Infrastructure\Event.cs" />
     <Compile Include="Events\PersonFinishedEducationEvent.cs" />
     <Compile Include="Events\PersonFinishedExperienceEvent.cs" />
     <Compile Include="Events\PersonStartedExperienceEvent.cs" />
-    <Compile Include="Events\VersionedEvent.cs" />
+    <Compile Include="Infrastructure\VersionedEvent.cs" />
     <Compile Include="Experience.cs" />
     <Compile Include="Gender.cs" />
     <Compile Include="Person.cs" />
@@ -50,7 +50,7 @@
     <Compile Include="Events\PersonNamedEvent.cs" />
     <Compile Include="Events\PersonStartedEducationEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VersionedEventSourced.cs" />
+    <Compile Include="Infrastructure\VersionedEventSourced.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

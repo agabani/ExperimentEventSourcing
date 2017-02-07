@@ -1,6 +1,6 @@
 using System;
 
-namespace domain.Events
+namespace domain.Infrastructure
 {
     public abstract class VersionedEvent : Event
     {

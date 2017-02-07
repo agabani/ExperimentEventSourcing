@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using domain.Commands;
 using domain.Events;
+using domain.Infrastructure;
 using NUnit.Framework;
 
 namespace domain.tests

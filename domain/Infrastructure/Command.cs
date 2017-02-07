@@ -1,6 +1,6 @@
 using System;
 
-namespace domain.Commands
+namespace domain.Infrastructure
 {
     public abstract class Command
     {
