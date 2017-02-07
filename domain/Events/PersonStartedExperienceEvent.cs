@@ -2,9 +2,9 @@ using System;
 
 namespace domain.Events
 {
-    public class PersonStartedExperienceEvent : Event
+    public class PersonStartedExperienceEvent : VersionedEvent
     {
-        public PersonStartedExperienceEvent(string institutionName, string title, DateTime when) : base(when)
+        public PersonStartedExperienceEvent(string institutionName, string title, DateTime when, ulong version) : base(when, version)
         {
             InstitutionName = institutionName;
             Title = title;

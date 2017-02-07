@@ -2,9 +2,9 @@
 
 namespace domain.Events
 {
-    public class PersonBornEvent : Event
+    public class PersonBornEvent : VersionedEvent
     {
-        public PersonBornEvent(Gender gender, DateTime dateOfBirth) : base(dateOfBirth)
+        public PersonBornEvent(Gender gender, DateTime dateOfBirth, ulong version) : base(dateOfBirth, version)
         {
             Gender = gender;
         }

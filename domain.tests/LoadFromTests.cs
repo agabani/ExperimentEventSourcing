@@ -12,32 +12,32 @@ namespace domain.tests
         [Test]
         public void Run()
         {
-            var events = new List<Event>
+            var events = new List<VersionedEvent>
             {
-                new PersonBornEvent(Gender.Male, new DateTime(1990, 10, 7)),
-                new PersonNamedEvent("Ahmed", "Agabani", new DateTime(1990, 10, 10)),
-                new PersonStartedEducationEvent("Evan Davis Nursary", new DateTime(1993, 9, 6)),
-                new PersonFinishedEducationEvent("Evan Davis Nursary", new DateTime(1995, 7, 31)),
-                new PersonStartedEducationEvent("Harlesden Primary School", new DateTime(1995, 9, 6)),
-                new PersonFinishedEducationEvent("Harlesden Primary School", new DateTime(2002, 7, 31)),
-                new PersonStartedEducationEvent("Preston Manor Secondary School", new DateTime(2002, 9, 6)),
-                new PersonStartedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 01)),
-                new PersonFinishedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 18)),
-                new PersonFinishedEducationEvent("Preston Manor Secondary School", new DateTime(2007, 7, 31)),
-                new PersonStartedEducationEvent("Preston Manor 6th Form", new DateTime(2007, 9, 6)),
-                new PersonFinishedEducationEvent("Preston Manor 6th Form", new DateTime(2009, 7, 31)),
-                new PersonStartedEducationEvent("University of Bristol", new DateTime(2009, 9, 6)),
-                new PersonStartedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 07, 01)),
-                new PersonFinishedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 09, 30)),
-                new PersonFinishedEducationEvent("University of Bristol", new DateTime(2013, 7, 31)),
-                new PersonStartedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2014, 06, 30)),
-                new PersonFinishedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2015, 09, 01)),
-                new PersonStartedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2015, 09, 02)),
-                new PersonFinishedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2016, 07, 22)),
-                new PersonStartedExperienceEvent("Capital One", "Software Engineer", new DateTime(2016, 07, 25))
+                new PersonBornEvent(Gender.Male, new DateTime(1990, 10, 7), 1),
+                new PersonNamedEvent("Ahmed", "Agabani", new DateTime(1990, 10, 10), 2),
+                new PersonStartedEducationEvent("Evan Davis Nursary", new DateTime(1993, 9, 6), 3),
+                new PersonFinishedEducationEvent("Evan Davis Nursary", new DateTime(1995, 7, 31), 4),
+                new PersonStartedEducationEvent("Harlesden Primary School", new DateTime(1995, 9, 6), 5),
+                new PersonFinishedEducationEvent("Harlesden Primary School", new DateTime(2002, 7, 31), 6),
+                new PersonStartedEducationEvent("Preston Manor Secondary School", new DateTime(2002, 9, 6), 7),
+                new PersonStartedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 01), 8),
+                new PersonFinishedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 18), 9),
+                new PersonFinishedEducationEvent("Preston Manor Secondary School", new DateTime(2007, 7, 31), 10),
+                new PersonStartedEducationEvent("Preston Manor 6th Form", new DateTime(2007, 9, 6), 11),
+                new PersonFinishedEducationEvent("Preston Manor 6th Form", new DateTime(2009, 7, 31), 12),
+                new PersonStartedEducationEvent("University of Bristol", new DateTime(2009, 9, 6), 13),
+                new PersonStartedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 07, 01), 14),
+                new PersonFinishedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 09, 30), 15),
+                new PersonFinishedEducationEvent("University of Bristol", new DateTime(2013, 7, 31), 16),
+                new PersonStartedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2014, 06, 30), 17),
+                new PersonFinishedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2015, 09, 01), 18),
+                new PersonStartedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2015, 09, 02), 19),
+                new PersonFinishedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2016, 07, 22), 20),
+                new PersonStartedExperienceEvent("Capital One", "Software Engineer", new DateTime(2016, 07, 25), 21)
             };
 
-            var person = EventSourced.LoadFrom<Person>(events);
+            var person = VersionedEventSourced.LoadFrom<Person>(events);
 
             var education = person.EducationalHistory.Single(e => e.InstitutionName == "Evan Davis Nursary");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1993, 9, 6)));

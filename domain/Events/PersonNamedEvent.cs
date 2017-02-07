@@ -2,10 +2,9 @@ using System;
 
 namespace domain.Events
 {
-    public class PersonNamedEvent : Event
+    public class PersonNamedEvent : VersionedEvent
     {
-        public PersonNamedEvent(string firstName, string lastName, DateTime when)
-            : base(when)
+        public PersonNamedEvent(string firstName, string lastName, DateTime when, ulong version) : base(when, version)
         {
             FirstName = firstName;
             LastName = lastName;
