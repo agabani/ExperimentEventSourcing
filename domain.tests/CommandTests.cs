@@ -15,7 +15,7 @@ namespace domain.tests
         {
             var person = EventSourced.LoadFrom<Person>(new List<Event>
             {
-                new PersonNamedEvent("Amjad", "Agabani", new DateTime(1998, 3, 20), 1)
+                new PersonNamedEvent(new DateTime(1998, 3, 20), 1, "Amjad", "Agabani")
             });
 
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));

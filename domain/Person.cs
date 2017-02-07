@@ -23,7 +23,7 @@ namespace domain
             Func<DateTime, DateTime> eighteen = dateOfBirth => new DateTime(dateOfBirth.Year + 18, dateOfBirth.Month, dateOfBirth.Day);
 
             return DateTime.UtcNow > eighteen(DateOfBirth)
-                ? (IEnumerable<Event>) new[] {new PersonNamedEvent(command.FirstName, command.LastName, command.When, Version + 1)}
+                ? (IEnumerable<Event>) new[] {new PersonNamedEvent(command.When, Version + 1, command.FirstName, command.LastName)}
                 : new List<Event>();
         }
     }

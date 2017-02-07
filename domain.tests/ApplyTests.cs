@@ -15,113 +15,113 @@ namespace domain.tests
 
 
             // Born
-            person.Apply(new PersonBornEvent(Gender.Male, new DateTime(1990, 10, 7), 1));
+            person.Apply(new PersonBornEvent(new DateTime(1990, 10, 7), 1, Gender.Male));
             Assert.That(person.Gender, Is.EqualTo(Gender.Male));
             Assert.That(person.DateOfBirth, Is.EqualTo(new DateTime(1990, 10, 7)));
 
             // Named
-            person.Apply(new PersonNamedEvent("Ahmed", "Agabani", new DateTime(1990, 10, 10), 2));
+            person.Apply(new PersonNamedEvent(new DateTime(1990, 10, 10), 2, "Ahmed", "Agabani"));
             Assert.That(person.FirstName, Is.EqualTo("Ahmed"));
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
             // Nursary
-            person.Apply(new PersonStartedEducationEvent("Evan Davis Nursary", new DateTime(1993, 9, 6), 3));
+            person.Apply(new PersonStartedEducationEvent(new DateTime(1993, 9, 6), 3, "Evan Davis Nursary"));
             var education = person.EducationalHistory.Single(e => e.InstitutionName == "Evan Davis Nursary");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1993, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedEducationEvent("Evan Davis Nursary", new DateTime(1995, 7, 31), 4));
+            person.Apply(new PersonFinishedEducationEvent(new DateTime(1995, 7, 31), 4, "Evan Davis Nursary"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Evan Davis Nursary");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1993, 9, 6)));
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(1995, 7, 31)));
 
             // Primary School
-            person.Apply(new PersonStartedEducationEvent("Harlesden Primary School", new DateTime(1995, 9, 6), 5));
+            person.Apply(new PersonStartedEducationEvent(new DateTime(1995, 9, 6), 5, "Harlesden Primary School"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Harlesden Primary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1995, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedEducationEvent("Harlesden Primary School", new DateTime(2002, 7, 31), 6));
+            person.Apply(new PersonFinishedEducationEvent(new DateTime(2002, 7, 31), 6, "Harlesden Primary School"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Harlesden Primary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(1995, 9, 6)));
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2002, 7, 31)));
 
             // Secondary School
-            person.Apply(new PersonStartedEducationEvent("Preston Manor Secondary School", new DateTime(2002, 9, 6), 7));
+            person.Apply(new PersonStartedEducationEvent(new DateTime(2002, 9, 6), 7, "Preston Manor Secondary School"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor Secondary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2002, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
 
-            person.Apply(new PersonStartedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 01), 8));
+            person.Apply(new PersonStartedExperienceEvent(new DateTime(2006, 04, 01), 8, "Cancer Black Care", "Receptionist"));
             var experience = person.ExperienceHistory.Single(e => e.InstitutionName == "Cancer Black Care" && e.Title == "Receptionist");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2006, 04, 01)));
             Assert.That(experience.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedExperienceEvent("Cancer Black Care", "Receptionist", new DateTime(2006, 04, 18), 9));
+            person.Apply(new PersonFinishedExperienceEvent(new DateTime(2006, 04, 18), 9, "Cancer Black Care", "Receptionist"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "Cancer Black Care" && e.Title == "Receptionist");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2006, 04, 01)));
             Assert.That(experience.EndDate, Is.EqualTo(new DateTime(2006, 04, 18)));
 
-            person.Apply(new PersonFinishedEducationEvent("Preston Manor Secondary School", new DateTime(2007, 7, 31), 10));
+            person.Apply(new PersonFinishedEducationEvent(new DateTime(2007, 7, 31), 10, "Preston Manor Secondary School"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor Secondary School");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2002, 9, 6)));
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2007, 7, 31)));
 
             // 6th Form
-            person.Apply(new PersonStartedEducationEvent("Preston Manor 6th Form", new DateTime(2007, 9, 6), 11));
+            person.Apply(new PersonStartedEducationEvent(new DateTime(2007, 9, 6), 11, "Preston Manor 6th Form"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor 6th Form");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2007, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedEducationEvent("Preston Manor 6th Form", new DateTime(2009, 7, 31), 12));
+            person.Apply(new PersonFinishedEducationEvent(new DateTime(2009, 7, 31), 12, "Preston Manor 6th Form"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "Preston Manor 6th Form");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2007, 9, 6)));
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2009, 7, 31)));
 
             // University
-            person.Apply(new PersonStartedEducationEvent("University of Bristol", new DateTime(2009, 9, 6), 13));
+            person.Apply(new PersonStartedEducationEvent(new DateTime(2009, 9, 6), 13, "University of Bristol"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "University of Bristol");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2009, 9, 6)));
             Assert.That(education.EndDate, Is.Null);
 
-            person.Apply(new PersonStartedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 07, 01), 14));
+            person.Apply(new PersonStartedExperienceEvent(new DateTime(2012, 07, 01), 14, "West One Food Ltd.", "Crew Member"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "West One Food Ltd." && e.Title == "Crew Member");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2012, 07, 01)));
             Assert.That(experience.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedExperienceEvent("West One Food Ltd.", "Crew Member", new DateTime(2012, 09, 30), 15));
+            person.Apply(new PersonFinishedExperienceEvent(new DateTime(2012, 09, 30), 15, "West One Food Ltd.", "Crew Member"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "West One Food Ltd." && e.Title == "Crew Member");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2012, 07, 01)));
             Assert.That(experience.EndDate, Is.EqualTo(new DateTime(2012, 09, 30)));
 
-            person.Apply(new PersonFinishedEducationEvent("University of Bristol", new DateTime(2013, 7, 31), 16));
+            person.Apply(new PersonFinishedEducationEvent(new DateTime(2013, 7, 31), 16, "University of Bristol"));
             education = person.EducationalHistory.Single(e => e.InstitutionName == "University of Bristol");
             Assert.That(education.StartDate, Is.EqualTo(new DateTime(2009, 9, 6)));
             Assert.That(education.EndDate, Is.EqualTo(new DateTime(2013, 7, 31)));
 
             // WorldRemit
-            person.Apply(new PersonStartedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2014, 06, 30), 17));
+            person.Apply(new PersonStartedExperienceEvent(new DateTime(2014, 06, 30), 17, "WorldRemit", "Junior Back-End Developer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "WorldRemit" && e.Title == "Junior Back-End Developer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2014, 06, 30)));
             Assert.That(experience.EndDate, Is.Null);
 
-            person.Apply(new PersonFinishedExperienceEvent("WorldRemit", "Junior Back-End Developer", new DateTime(2015, 09, 01), 18));
+            person.Apply(new PersonFinishedExperienceEvent(new DateTime(2015, 09, 01), 18, "WorldRemit", "Junior Back-End Developer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "WorldRemit" && e.Title == "Junior Back-End Developer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2014, 06, 30)));
             Assert.That(experience.EndDate, Is.EqualTo(new DateTime(2015, 09, 01)));
 
-            person.Apply(new PersonStartedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2015, 09, 02), 19));
+            person.Apply(new PersonStartedExperienceEvent(new DateTime(2015, 09, 02), 19, "WorldRemit", "Software Engineer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "WorldRemit" && e.Title == "Software Engineer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2015, 09, 02)));
             Assert.That(experience.EndDate, Is.Null);
 
             // Capital One
-            person.Apply(new PersonFinishedExperienceEvent("WorldRemit", "Software Engineer", new DateTime(2016, 07, 22), 20));
+            person.Apply(new PersonFinishedExperienceEvent(new DateTime(2016, 07, 22), 20, "WorldRemit", "Software Engineer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "WorldRemit" && e.Title == "Software Engineer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2015, 09, 02)));
             Assert.That(experience.EndDate, Is.EqualTo(new DateTime(2016, 07, 22)));
 
-            person.Apply(new PersonStartedExperienceEvent("Capital One", "Software Engineer", new DateTime(2016, 07, 25), 21));
+            person.Apply(new PersonStartedExperienceEvent(new DateTime(2016, 07, 25), 21, "Capital One", "Software Engineer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "Capital One" && e.Title == "Software Engineer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2016, 07, 25)));
             Assert.That(experience.EndDate, Is.Null);

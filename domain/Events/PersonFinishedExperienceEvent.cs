@@ -4,7 +4,7 @@ namespace domain.Events
 {
     public class PersonFinishedExperienceEvent : VersionedEvent
     {
-        public PersonFinishedExperienceEvent(string institutionName, string title, DateTime when, ulong version) : base(when, version)
+        public PersonFinishedExperienceEvent(DateTime when, ulong version, string institutionName, string title) : base(when, version)
         {
             InstitutionName = institutionName;
             Title = title;

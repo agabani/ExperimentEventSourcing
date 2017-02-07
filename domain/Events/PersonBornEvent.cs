@@ -4,7 +4,7 @@ namespace domain.Events
 {
     public class PersonBornEvent : VersionedEvent
     {
-        public PersonBornEvent(Gender gender, DateTime dateOfBirth, ulong version) : base(dateOfBirth, version)
+        public PersonBornEvent(DateTime dateOfBirth, ulong version, Gender gender) : base(dateOfBirth, version)
         {
             Gender = gender;
         }
