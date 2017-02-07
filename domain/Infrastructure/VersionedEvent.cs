@@ -4,7 +4,8 @@ namespace domain.Infrastructure
 {
     public abstract class VersionedEvent : Event
     {
-        protected VersionedEvent(DateTime when, ulong version) : base(when)
+        protected VersionedEvent(DateTime when, string type, ulong version)
+            : base(when, type)
         {
             Version = version;
         }
