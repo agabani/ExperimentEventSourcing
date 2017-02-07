@@ -50,6 +50,8 @@
     <Compile Include="Events\PersonBornEvent.cs" />
     <Compile Include="Events\PersonNamedEvent.cs" />
     <Compile Include="Events\PersonStartedEducationEvent.cs" />
+    <Compile Include="Person.Commands.cs" />
+    <Compile Include="Person.Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Infrastructure\VersionedEventSourced.cs" />
   </ItemGroup>
