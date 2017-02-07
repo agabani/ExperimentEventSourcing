@@ -7,11 +7,19 @@ namespace domain.Infrastructure
     {
         public ulong Version { get; private set; }
 
+        public void Apply(IEnumerable<VersionedEvent> events)
+        {
+            foreach (var @event in events)
+            {
+                Apply(@event);
+            }
+        }
+
         public void Apply(VersionedEvent @event)
         {
-            if (@event.Version != Version + 1)
+            if (@event.Version != Version)
             {
-                throw new InvalidOperationException($"Expected event version {Version + 1} but was {@event.Version}.");
+                throw new InvalidOperationException($"Expected event version {Version} but was {@event.Version}.");
             }
 
             Version++;

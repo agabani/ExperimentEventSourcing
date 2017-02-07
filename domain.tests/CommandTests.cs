@@ -16,13 +16,13 @@ namespace domain.tests
         {
             var person = VersionedEventSourced.LoadFrom<Person>(new List<VersionedEvent>
             {
-                new PersonNamedEvent(new DateTime(1998, 3, 20), 1, "Amjad", "Agabani")
+                new PersonNamedEvent(new DateTime(1998, 3, 20), 0, "Amjad", "Agabani")
             });
 
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
-            var command = new ChangeNameCommand(new DateTime(1998, 3, 24), person.Version, "Amjed", "Agabani");
+            var command = new ChangeNameCommand(new DateTime(1998, 3, 24), 1, "Amjed", "Agabani");
             var @event = (PersonNamedEvent) person.Execute(command).Single();
 
             Assert.That(@event.FirstName, Is.EqualTo("Amjed"));

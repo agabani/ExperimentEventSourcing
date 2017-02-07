@@ -29,7 +29,7 @@ namespace domain
                 throw new InvalidOperationException($"Person must wait until {their18ThBirthDay} to change their name.");
             }
 
-            return new[] {new PersonNamedEvent(command.When, Version + 1, command.FirstName, command.LastName)};
+            return new[] {new PersonNamedEvent(command.When, Version, command.FirstName, command.LastName)};
         }
 
         public IEnumerable<VersionedEvent> Execute(StartEducation command)
