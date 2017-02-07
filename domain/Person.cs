@@ -25,56 +25,63 @@ namespace domain
 
     public partial class Person : EventSourced
     {
+        private new static readonly IReadOnlyDictionary<Type, Action<Event, object>> Actions = new Dictionary<Type, Action<Event, object>>
+        {
+            {typeof(PersonBornEvent), PersonBornEvent},
+            {typeof(PersonNamedEvent), PersonNamedEvent},
+            {typeof(PersonStartedEducationEvent), PersonStartedEducationEvent},
+            {typeof(PersonFinishedEducationEvent), PersonFinishedEducationEvent},
+            {typeof(PersonStartedExperienceEvent), PersonStartedExperienceEvent},
+            {typeof(PersonFinishedExperienceEvent), PersonFinishedExperienceEvent}
+        };
+
         public Person()
         {
-            Actions = new Dictionary<Type, Action<Event>>
-            {
-                {typeof(PersonBornEvent), PersonBornEvent},
-                {typeof(PersonNamedEvent), PersonNamedEvent},
-                {typeof(PersonStartedEducationEvent), PersonStartedEducationEvent},
-                {typeof(PersonFinishedEducationEvent), PersonFinishedEducationEvent},
-                {typeof(PersonStartedExperienceEvent), PersonStartedExperienceEvent},
-                {typeof(PersonFinishedExperienceEvent), PersonFinishedExperienceEvent}
-            };
+            base.Actions = Actions;
         }
 
-        private void PersonBornEvent(Event @event)
+        private static void PersonBornEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personBornEvent = (PersonBornEvent) @event;
-            Gender = personBornEvent.Gender;
-            DateOfBirth = personBornEvent.DateOfBirth;
+            person.Gender = personBornEvent.Gender;
+            person.DateOfBirth = personBornEvent.DateOfBirth;
         }
 
-        private void PersonNamedEvent(Event @event)
+        private static void PersonNamedEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personNamedEvent = (PersonNamedEvent) @event;
-            FirstName = personNamedEvent.FirstName;
-            LastName = personNamedEvent.LastName;
+            person.FirstName = personNamedEvent.FirstName;
+            person.LastName = personNamedEvent.LastName;
         }
 
-        private void PersonStartedEducationEvent(Event @event)
+        private static void PersonStartedEducationEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personStartedEductionEvent = (PersonStartedEducationEvent) @event;
-            EducationalHistory.Add(new Education
+            person.EducationalHistory.Add(new Education
             {
                 InstitutionName = personStartedEductionEvent.InstitutionName,
                 StartDate = personStartedEductionEvent.When
             });
         }
 
-        private void PersonFinishedEducationEvent(Event @event)
+        private static void PersonFinishedEducationEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personFinishedEducationEvent = (PersonFinishedEducationEvent) @event;
-            EducationalHistory
+            person.EducationalHistory
                 .Single(e => e.InstitutionName == personFinishedEducationEvent.InstitutionName
                              && e.EndDate == null)
                 .EndDate = @event.When;
         }
 
-        private void PersonStartedExperienceEvent(Event @event)
+        private static void PersonStartedExperienceEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personStartedExperienceEvent = (PersonStartedExperienceEvent) @event;
-            ExperienceHistory.Add(new Experience
+            person.ExperienceHistory.Add(new Experience
             {
                 InstitutionName = personStartedExperienceEvent.InstitutionName,
                 Title = personStartedExperienceEvent.Title,
@@ -82,10 +89,11 @@ namespace domain
             });
         }
 
-        private void PersonFinishedExperienceEvent(Event @event)
+        private static void PersonFinishedExperienceEvent(Event @event, object @object)
         {
+            var person = (Person) @object;
             var personFinishedExperienceEvent = (PersonFinishedExperienceEvent) @event;
-            ExperienceHistory
+            person.ExperienceHistory
                 .Single(e => e.InstitutionName == personFinishedExperienceEvent.InstitutionName
                              && e.Title == personFinishedExperienceEvent.Title
                              && e.EndDate == null)

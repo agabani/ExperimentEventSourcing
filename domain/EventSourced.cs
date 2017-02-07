@@ -6,11 +6,11 @@ namespace domain
 {
     public abstract class EventSourced
     {
-        protected IReadOnlyDictionary<Type, Action<Event>> Actions;
+        protected IReadOnlyDictionary<Type, Action<Event, object>> Actions { get; set; }
 
         public void Apply(Event @event)
         {
-            Actions[@event.GetType()].Invoke(@event);
+            Actions[@event.GetType()].Invoke(@event, this);
         }
 
         public static T LoadFrom<T>(List<Event> events) where T : EventSourced, new()
