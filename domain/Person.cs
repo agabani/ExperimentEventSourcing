@@ -17,37 +17,17 @@ namespace domain
 
     public partial class Person
     {
-        public void Apply(Event @event)
-        {
-            Actions[@event.GetType()].Invoke(this, @event);
-        }
-
-        public static Person LoadFrom(List<Event> events)
-        {
-            var person = new Person();
-            foreach (var @event in events)
-            {
-                person.Apply(@event);
-            }
-            return person;
-        }
-    }
-
-    public partial class Person
-    {
         public Event ChangeName(string firstName, string lastName, DateTime when)
         {
             return new PersonNamedEvent(firstName, lastName, when);
         }
     }
 
-    public partial class Person
+    public partial class Person : EventSourced
     {
-        private static readonly IReadOnlyDictionary<Type, Action<Person, Event>> Actions;
-
-        static Person()
+        public Person()
         {
-            Actions = new Dictionary<Type, Action<Person, Event>>
+            Actions = new Dictionary<Type, Action<Event>>
             {
                 {typeof(PersonBornEvent), PersonBornEvent},
                 {typeof(PersonNamedEvent), PersonNamedEvent},
@@ -58,43 +38,43 @@ namespace domain
             };
         }
 
-        private static void PersonBornEvent(Person person, Event @event)
+        private void PersonBornEvent(Event @event)
         {
             var personBornEvent = (PersonBornEvent) @event;
-            person.Gender = personBornEvent.Gender;
-            person.DateOfBirth = personBornEvent.DateOfBirth;
+            Gender = personBornEvent.Gender;
+            DateOfBirth = personBornEvent.DateOfBirth;
         }
 
-        private static void PersonNamedEvent(Person person, Event @event)
+        private void PersonNamedEvent(Event @event)
         {
             var personNamedEvent = (PersonNamedEvent) @event;
-            person.FirstName = personNamedEvent.FirstName;
-            person.LastName = personNamedEvent.LastName;
+            FirstName = personNamedEvent.FirstName;
+            LastName = personNamedEvent.LastName;
         }
 
-        private static void PersonStartedEducationEvent(Person person, Event @event)
+        private void PersonStartedEducationEvent(Event @event)
         {
             var personStartedEductionEvent = (PersonStartedEducationEvent) @event;
-            person.EducationalHistory.Add(new Education
+            EducationalHistory.Add(new Education
             {
                 InstitutionName = personStartedEductionEvent.InstitutionName,
                 StartDate = personStartedEductionEvent.When
             });
         }
 
-        private static void PersonFinishedEducationEvent(Person person, Event @event)
+        private void PersonFinishedEducationEvent(Event @event)
         {
             var personFinishedEducationEvent = (PersonFinishedEducationEvent) @event;
-            person.EducationalHistory
+            EducationalHistory
                 .Single(e => e.InstitutionName == personFinishedEducationEvent.InstitutionName
                              && e.EndDate == null)
                 .EndDate = @event.When;
         }
 
-        private static void PersonStartedExperienceEvent(Person person, Event @event)
+        private void PersonStartedExperienceEvent(Event @event)
         {
             var personStartedExperienceEvent = (PersonStartedExperienceEvent) @event;
-            person.ExperienceHistory.Add(new Experience
+            ExperienceHistory.Add(new Experience
             {
                 InstitutionName = personStartedExperienceEvent.InstitutionName,
                 Title = personStartedExperienceEvent.Title,
@@ -102,10 +82,10 @@ namespace domain
             });
         }
 
-        private static void PersonFinishedExperienceEvent(Person person, Event @event)
+        private void PersonFinishedExperienceEvent(Event @event)
         {
             var personFinishedExperienceEvent = (PersonFinishedExperienceEvent) @event;
-            person.ExperienceHistory
+            ExperienceHistory
                 .Single(e => e.InstitutionName == personFinishedExperienceEvent.InstitutionName
                              && e.Title == personFinishedExperienceEvent.Title
                              && e.EndDate == null)
