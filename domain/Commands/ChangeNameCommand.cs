@@ -3,10 +3,10 @@ using domain.Infrastructure;
 
 namespace domain.Commands
 {
-    public class ChangeNameCommand : Command
+    public class ChangeNameCommand : VersionedCommand
     {
-        public ChangeNameCommand(string firstName, string lastName, DateTime when)
-            : base(when)
+        public ChangeNameCommand(DateTime when, ulong version, string firstName, string lastName)
+            : base(when, version)
         {
             FirstName = firstName;
             LastName = lastName;

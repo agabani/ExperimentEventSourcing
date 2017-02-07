@@ -14,7 +14,7 @@ namespace domain.tests
         [Test]
         public void Run()
         {
-            var person = EventSourced.LoadFrom<Person>(new List<Event>
+            var person = VersionedEventSourced.LoadFrom<Person>(new List<VersionedEvent>
             {
                 new PersonNamedEvent(new DateTime(1998, 3, 20), 1, "Amjad", "Agabani")
             });
@@ -22,7 +22,7 @@ namespace domain.tests
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
-            var command = new ChangeNameCommand("Amjed", "Agabani", new DateTime(1998, 3, 24));
+            var command = new ChangeNameCommand(new DateTime(1998, 3, 24), person.Version, "Amjed", "Agabani");
             var @event = (PersonNamedEvent) person.Execute(command).Single();
 
             Assert.That(@event.FirstName, Is.EqualTo("Amjed"));

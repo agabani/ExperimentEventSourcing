@@ -42,6 +42,7 @@
     <Compile Include="Events\PersonFinishedEducationEvent.cs" />
     <Compile Include="Events\PersonFinishedExperienceEvent.cs" />
     <Compile Include="Events\PersonStartedExperienceEvent.cs" />
+    <Compile Include="Infrastructure\VersionedCommand.cs" />
     <Compile Include="Infrastructure\VersionedEvent.cs" />
     <Compile Include="Experience.cs" />
     <Compile Include="Gender.cs" />

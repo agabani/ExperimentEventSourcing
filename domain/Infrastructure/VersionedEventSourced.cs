@@ -24,5 +24,11 @@ namespace domain.Infrastructure
             foreach (var @event in events) versionedEventSourced.Apply(@event);
             return versionedEventSourced;
         }
+
+        protected static void ValidateVersion(VersionedEventSourced source, VersionedCommand command)
+        {
+            if (command.Version != source.Version)
+                throw new InvalidOperationException($"Expected version {source.Version} but was version {command.Version}");
+        }
     }
 }

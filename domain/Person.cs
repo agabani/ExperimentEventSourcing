@@ -21,6 +21,8 @@ namespace domain
     {
         public IEnumerable<Event> Execute(ChangeNameCommand command)
         {
+            ValidateVersion(this, command);
+
             Func<DateTime, DateTime> eighteen = dateOfBirth => new DateTime(dateOfBirth.Year + 18, dateOfBirth.Month, dateOfBirth.Day);
 
             return DateTime.UtcNow > eighteen(DateOfBirth)
