@@ -10,6 +10,6 @@ namespace domain.Infrastructure
             Version = version;
         }
 
-        public ulong Version { get; protected set; }
+        public ulong Version { get; private set; }
     }
 }

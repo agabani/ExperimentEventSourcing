@@ -10,7 +10,7 @@ namespace domain.Infrastructure
             Type = type;
         }
 
-        public DateTime When { get; protected set; }
+        public DateTime When { get; private set; }
 
         public string Type { get; private set; }
     }
