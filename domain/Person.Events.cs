@@ -28,7 +28,7 @@ namespace domain
             var person = (Person) @object;
             var personBornEvent = (PersonBornEvent) @event;
             person.Gender = personBornEvent.Gender;
-            person.DateOfBirth = personBornEvent.DateOfBirth;
+            person.DateOfBirth = personBornEvent.When;
         }
 
         private static void PersonNamedEvent(Event @event, object @object)

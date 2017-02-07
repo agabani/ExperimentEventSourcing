@@ -115,12 +115,12 @@ namespace domain.tests
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2015, 09, 02)));
             Assert.That(experience.EndDate, Is.Null);
 
-            // Capital One
             person.Apply(new PersonFinishedExperienceEvent(new DateTime(2016, 07, 22), 19, "WorldRemit", "Software Engineer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "WorldRemit" && e.Title == "Software Engineer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2015, 09, 02)));
             Assert.That(experience.EndDate, Is.EqualTo(new DateTime(2016, 07, 22)));
-
+            
+            // Capital One
             person.Apply(new PersonStartedExperienceEvent(new DateTime(2016, 07, 25), 20, "Capital One", "Software Engineer"));
             experience = person.ExperienceHistory.Single(e => e.InstitutionName == "Capital One" && e.Title == "Software Engineer");
             Assert.That(experience.StartDate, Is.EqualTo(new DateTime(2016, 07, 25)));

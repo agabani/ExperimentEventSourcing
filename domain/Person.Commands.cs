@@ -13,7 +13,9 @@ namespace domain
         {
             ValidateVersionFor(this, command);
 
-            return new[] {new PersonBornEvent(DateOfBirth, Version, Gender)};
+            var personBornEvent = new PersonBornEvent(command.When, Version, command.Gender);
+            var personBornEvents = new[] {personBornEvent};
+            return personBornEvents;
         }
 
         public IEnumerable<VersionedEvent> Execute(ChangeNameCommand command)
@@ -24,7 +26,7 @@ namespace domain
 
             var their18ThBirthDay = eighteen(DateOfBirth);
 
-            if (DateTime.UtcNow < their18ThBirthDay)
+            if (FirstName != null && LastName != null && DateTime.UtcNow < their18ThBirthDay)
             {
                 throw new InvalidOperationException($"Person must wait until {their18ThBirthDay} to change their name.");
             }
