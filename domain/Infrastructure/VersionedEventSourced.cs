@@ -28,7 +28,7 @@ namespace domain.Infrastructure
             return versionedEventSourced;
         }
 
-        protected static void ValidateVersion(VersionedEventSourced source, VersionedCommand command)
+        protected static void ValidateVersionFor(VersionedEventSourced source, VersionedCommand command)
         {
             if (command.Version != source.Version)
             {

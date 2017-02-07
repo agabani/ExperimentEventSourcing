@@ -34,7 +34,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\BirthedCommand.cs" />
     <Compile Include="Commands\ChangeNameCommand.cs" />
+    <Compile Include="Commands\FinishExperience.cs" />
+    <Compile Include="Commands\FinishEducation.cs" />
+    <Compile Include="Commands\StartEducation.cs" />
+    <Compile Include="Commands\StartExperience.cs" />
     <Compile Include="Infrastructure\Command.cs" />
     <Compile Include="Education.cs" />
     <Compile Include="Infrastructure\EventSourced.cs" />
