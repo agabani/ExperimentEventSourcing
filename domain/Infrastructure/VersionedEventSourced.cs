@@ -21,14 +21,19 @@ namespace domain.Infrastructure
         public static T LoadFrom<T>(List<VersionedEvent> events) where T : VersionedEventSourced, new()
         {
             var versionedEventSourced = new T();
-            foreach (var @event in events) versionedEventSourced.Apply(@event);
+            foreach (var @event in events)
+            {
+                versionedEventSourced.Apply(@event);
+            }
             return versionedEventSourced;
         }
 
         protected static void ValidateVersion(VersionedEventSourced source, VersionedCommand command)
         {
             if (command.Version != source.Version)
+            {
                 throw new InvalidOperationException($"Expected command version {source.Version} but was {command.Version}.");
+            }
         }
     }
 }

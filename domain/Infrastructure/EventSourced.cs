@@ -15,7 +15,10 @@ namespace domain.Infrastructure
         public static T LoadFrom<T>(List<Event> events) where T : EventSourced, new()
         {
             var eventSourced = new T();
-            foreach (var @event in events) eventSourced.Apply(@event);
+            foreach (var @event in events)
+            {
+                eventSourced.Apply(@event);
+            }
             return eventSourced;
         }
     }
