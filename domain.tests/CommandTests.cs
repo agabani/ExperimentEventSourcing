@@ -11,7 +11,7 @@ namespace domain.tests
         [Test]
         public void Run()
         {
-            var person = Person.LoadFrom(new List<Event>
+            var person = EventSourced.LoadFrom<Person>(new List<Event>
             {
                 new PersonNamedEvent("Amjad", "Agabani", new DateTime(1998, 3, 20))
             });

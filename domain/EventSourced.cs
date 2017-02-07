@@ -4,7 +4,7 @@ using domain.Events;
 
 namespace domain
 {
-    public class EventSourced
+    public abstract class EventSourced
     {
         protected IReadOnlyDictionary<Type, Action<Event>> Actions;
 
@@ -13,14 +13,11 @@ namespace domain
             Actions[@event.GetType()].Invoke(@event);
         }
 
-        public static Person LoadFrom(List<Event> events)
+        public static T LoadFrom<T>(List<Event> events) where T : EventSourced, new()
         {
-            var person = new Person();
-            foreach (var @event in events)
-            {
-                person.Apply(@event);
-            }
-            return person;
+            var eventSourced = new T();
+            foreach (var @event in events) eventSourced.Apply(@event);
+            return eventSourced;
         }
     }
 }
