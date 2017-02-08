@@ -18,7 +18,8 @@ namespace domain
             {typeof(PersonFinishedExperienceEvent), PersonFinishedExperienceEvent}
         };
 
-        public Person(Guid id) : base(id, Actions)
+        public Person(Guid id)
+            : base(id, Actions)
         {
         }
 
