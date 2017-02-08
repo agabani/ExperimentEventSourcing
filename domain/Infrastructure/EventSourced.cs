@@ -6,8 +6,8 @@ namespace domain.Infrastructure
 {
     public abstract class EventSourced
     {
-
         private readonly IReadOnlyDictionary<Type, Action<Event, object>> _actions;
+
         protected EventSourced(Guid id, IReadOnlyDictionary<Type, Action<Event, object>> actions)
         {
             Id = id;
@@ -28,7 +28,7 @@ namespace domain.Infrastructure
         {
             if (Id != @event.EventSourcedId)
             {
-                throw new InvalidOperationException($"Expected {nameof(@event.EventSourcedId)} to be {Id} but was {@event.EventSourcedId}.");
+                throw new InvalidOperationException($"Expected {nameof(@event.EventSourcedId)} to be \"{Id}\" but was \"{@event.EventSourcedId}\".");
             }
 
             _actions[@event.GetType()].Invoke(@event, this);
@@ -48,7 +48,7 @@ namespace domain.Infrastructure
         {
             if (command.EventSourcedId != source.Id)
             {
-                throw new InvalidOperationException($"Expected {nameof(command.EventSourcedId)} to be {source.Id} but was {command.EventSourcedId}.");
+                throw new InvalidOperationException($"Expected {nameof(command.EventSourcedId)} to be \"{source.Id}\" but was \"{command.EventSourcedId}\".");
             }
         }
     }
