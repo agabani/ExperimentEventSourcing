@@ -6,7 +6,8 @@ namespace domain.Infrastructure
 {
     public abstract class VersionedEventSourced : EventSourced
     {
-        protected VersionedEventSourced(Guid id, IReadOnlyDictionary<Type, Action<Event, object>> actions) : base(id, actions)
+        protected VersionedEventSourced(Guid id, IReadOnlyDictionary<Type, Action<Event, object>> actions)
+            : base(id, actions)
         {
         }
 
@@ -33,7 +34,7 @@ namespace domain.Infrastructure
 
         public static T LoadFrom<T>(List<VersionedEvent> events) where T : VersionedEventSourced
         {
-            var versionedEventSourced = (T)Activator.CreateInstance(typeof(T), events.First().EventSourcedId);
+            var versionedEventSourced = (T) Activator.CreateInstance(typeof(T), events.First().EventSourcedId);
             foreach (var @event in events)
             {
                 versionedEventSourced.Apply(@event);

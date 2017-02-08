@@ -4,7 +4,8 @@ namespace domain.Infrastructure
 {
     public class VersionedCommand : Command
     {
-        public VersionedCommand(DateTime when, ulong version) : base(when)
+        public VersionedCommand(DateTime when, ulong version)
+            : base(when)
         {
             Version = version;
         }
