@@ -44,6 +44,8 @@ namespace domain.Infrastructure
 
         protected static void ValidateVersionFor(VersionedEventSourced source, VersionedCommand command)
         {
+            EventSourced.ValidateVersionFor(source, command);
+
             if (command.Version != source.Version)
             {
                 throw new InvalidOperationException($"Expected command version {source.Version} but was {command.Version}.");

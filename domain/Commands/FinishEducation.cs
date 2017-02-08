@@ -5,8 +5,8 @@ namespace domain.Commands
 {
     public class FinishEducation : VersionedCommand
     {
-        public FinishEducation(DateTime when, ulong version, string institutionName)
-            : base(when, version)
+        public FinishEducation(Guid eventSourcedId, DateTime when, ulong version, string institutionName)
+            : base(eventSourcedId, when, version)
         {
             InstitutionName = institutionName;
         }

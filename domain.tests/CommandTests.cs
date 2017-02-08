@@ -24,7 +24,7 @@ namespace domain.tests
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));
             Assert.That(person.LastName, Is.EqualTo("Agabani"));
 
-            var command = new ChangeNameCommand(new DateTime(1998, 3, 24), 1, "Amjed", "Agabani");
+            var command = new ChangeNameCommand(id, new DateTime(1998, 3, 24), 1, "Amjed", "Agabani");
             var @event = (PersonNamedEvent) person.Execute(command).Single();
 
             Assert.That(@event.FirstName, Is.EqualTo("Amjed"));

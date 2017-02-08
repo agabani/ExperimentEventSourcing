@@ -5,8 +5,8 @@ namespace domain.Commands
 {
     public class BirthedCommand : VersionedCommand
     {
-        public BirthedCommand(DateTime when, ulong version, Gender gender)
-            : base(when, version)
+        public BirthedCommand(Guid eventSourcedId, DateTime when, ulong version, Gender gender)
+            : base(eventSourcedId, when, version)
         {
             Gender = gender;
         }

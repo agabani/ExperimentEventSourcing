@@ -43,5 +43,13 @@ namespace domain.Infrastructure
             }
             return eventSourced;
         }
+
+        protected static void ValidateVersionFor(EventSourced source, Command command)
+        {
+            if (command.EventSourcedId != source.Id)
+            {
+                throw new InvalidOperationException($"Expected {nameof(command.EventSourcedId)} to be {source.Id} but was {command.EventSourcedId}.");
+            }
+        }
     }
 }

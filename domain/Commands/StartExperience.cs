@@ -5,8 +5,8 @@ namespace domain.Commands
 {
     public class StartExperience : VersionedCommand
     {
-        public StartExperience(DateTime when, ulong version, string institutionName, string title)
-            : base(when, version)
+        public StartExperience(Guid eventSourcedId, DateTime when, ulong version, string institutionName, string title)
+            : base(eventSourcedId, when, version)
         {
             InstitutionName = institutionName;
             Title = title;

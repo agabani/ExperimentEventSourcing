@@ -6,15 +6,13 @@ namespace domain.Infrastructure
     {
         protected Event(Guid eventSourcedId, DateTime when, string type)
         {
+            EventSourcedId = eventSourcedId;
             When = when;
             Type = type;
-            EventSourcedId = eventSourcedId;
         }
 
-        public DateTime When { get; private set; }
-
-        public string Type { get; private set; }
-
         public Guid EventSourcedId { get; private set; }
+        public DateTime When { get; private set; }
+        public string Type { get; private set; }
     }
 }

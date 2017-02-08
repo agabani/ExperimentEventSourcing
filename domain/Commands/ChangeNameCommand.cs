@@ -5,8 +5,8 @@ namespace domain.Commands
 {
     public class ChangeNameCommand : VersionedCommand
     {
-        public ChangeNameCommand(DateTime when, ulong version, string firstName, string lastName)
-            : base(when, version)
+        public ChangeNameCommand(Guid eventSourcedId, DateTime when, ulong version, string firstName, string lastName)
+            : base(eventSourcedId, when, version)
         {
             FirstName = firstName;
             LastName = lastName;
