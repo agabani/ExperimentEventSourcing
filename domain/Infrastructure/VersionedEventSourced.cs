@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace domain.Infrastructure
 {
     public abstract class VersionedEventSourced : EventSourced
     {
+        protected VersionedEventSourced(Guid id, IReadOnlyDictionary<Type, Action<Event, object>> actions) : base(id, actions)
+        {
+        }
+
         public ulong Version { get; private set; }
 
         public void Apply(IEnumerable<VersionedEvent> events)
@@ -26,9 +31,9 @@ namespace domain.Infrastructure
             base.Apply(@event);
         }
 
-        public static T LoadFrom<T>(List<VersionedEvent> events) where T : VersionedEventSourced, new()
+        public static T LoadFrom<T>(List<VersionedEvent> events) where T : VersionedEventSourced
         {
-            var versionedEventSourced = new T();
+            var versionedEventSourced = (T)Activator.CreateInstance(typeof(T), events.First().EventSourcedId);
             foreach (var @event in events)
             {
                 versionedEventSourced.Apply(@event);

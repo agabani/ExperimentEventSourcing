@@ -11,7 +11,7 @@ namespace domain.tests
         [Test]
         public void Run()
         {
-            var person = new Person();
+            var person = Person.Create();
 
             // Born
             var versionedEvents = person.Execute(new BirthedCommand(new DateTime(1990, 10, 7), person.Version, Gender.Male));

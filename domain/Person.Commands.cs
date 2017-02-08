@@ -13,9 +13,7 @@ namespace domain
         {
             ValidateVersionFor(this, command);
 
-            var personBornEvent = new PersonBornEvent(command.When, Version, command.Gender);
-            var personBornEvents = new[] {personBornEvent};
-            return personBornEvents;
+            return new[] {new PersonBornEvent(Id, command.When, Version, command.Gender)};
         }
 
         public IEnumerable<VersionedEvent> Execute(ChangeNameCommand command)
@@ -31,7 +29,7 @@ namespace domain
                 throw new InvalidOperationException($"Person must wait until {their18ThBirthDay} to change their name.");
             }
 
-            return new[] {new PersonNamedEvent(command.When, Version, command.FirstName, command.LastName)};
+            return new[] {new PersonNamedEvent(Id, command.When, Version, command.FirstName, command.LastName)};
         }
 
         public IEnumerable<VersionedEvent> Execute(StartEducation command)
@@ -44,7 +42,7 @@ namespace domain
                 throw new InvalidOperationException($"Person cannot start new educational experience at \"{command.InstitutionName}\" until they have completed their current experience at \"{command.InstitutionName}\".");
             }
 
-            return new[] {new PersonStartedEducationEvent(command.When, Version, command.InstitutionName)};
+            return new[] {new PersonStartedEducationEvent(Id, command.When, Version, command.InstitutionName) };
         }
 
         public IEnumerable<VersionedEvent> Execute(FinishEducation command)
@@ -60,7 +58,7 @@ namespace domain
                 throw new InvalidOperationException($"Person cannot finish their educational experience at \"{command.InstitutionName}\" because they are not currently attending at \"{command.InstitutionName}\".");
             }
 
-            return new[] {new PersonFinishedEducationEvent(command.When, Version, command.InstitutionName)};
+            return new[] {new PersonFinishedEducationEvent(Id, command.When, Version, command.InstitutionName) };
         }
 
         public IEnumerable<VersionedEvent> Execute(StartExperience command)
@@ -74,7 +72,7 @@ namespace domain
                 throw new InvalidOperationException($"Person cannot start a new experience at \"{command.InstitutionName}\" until they have completed their experience at \"{experience.InstitutionName}\" as \"{experience.Title}\".");
             }
 
-            return new[] {new PersonStartedExperienceEvent(command.When, Version, command.InstitutionName, command.Title)};
+            return new[] {new PersonStartedExperienceEvent(Id, command.When, Version, command.InstitutionName, command.Title) };
         }
 
         public IEnumerable<VersionedEvent> Execute(FinishExperience command)
@@ -91,7 +89,7 @@ namespace domain
                 throw new InvalidOperationException($"Person cannot complete their experience at \"{command.InstitutionName}\" as \"{command.Title}\" because they are not currently undergoing an experience at \"{command.InstitutionName}\" as \"{command.Title}\".");
             }
 
-            return new[] {new PersonFinishedExperienceEvent(command.When, Version, command.InstitutionName, command.Title)};
+            return new[] {new PersonFinishedExperienceEvent(Id, command.When, Version, command.InstitutionName, command.Title) };
         }
     }
 }

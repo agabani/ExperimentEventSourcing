@@ -5,8 +5,8 @@ namespace domain.Events
 {
     public class PersonNamedEvent : VersionedEvent
     {
-        public PersonNamedEvent(DateTime when, ulong version, string firstName, string lastName)
-            : base(when, "person named v1", version)
+        public PersonNamedEvent(Guid eventSourcedId, DateTime when, ulong version, string firstName, string lastName)
+            : base(eventSourcedId, when, "person named v1", version)
         {
             FirstName = firstName;
             LastName = lastName;

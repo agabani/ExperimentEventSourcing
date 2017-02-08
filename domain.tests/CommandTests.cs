@@ -14,9 +14,11 @@ namespace domain.tests
         [Test]
         public void Run()
         {
+            var id = Guid.NewGuid();
+
             var person = VersionedEventSourced.LoadFrom<Person>(new List<VersionedEvent>
             {
-                new PersonNamedEvent(new DateTime(1998, 3, 20), 0, "Amjad", "Agabani")
+                new PersonNamedEvent(id, new DateTime(1998, 3, 20), 0, "Amjad", "Agabani")
             });
 
             Assert.That(person.FirstName, Is.EqualTo("Amjad"));

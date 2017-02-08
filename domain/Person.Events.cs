@@ -8,7 +8,7 @@ namespace domain
 {
     public partial class Person
     {
-        private new static readonly IReadOnlyDictionary<Type, Action<Event, object>> Actions = new Dictionary<Type, Action<Event, object>>
+        private static readonly IReadOnlyDictionary<Type, Action<Event, object>> Actions = new Dictionary<Type, Action<Event, object>>
         {
             {typeof(PersonBornEvent), PersonBornEvent},
             {typeof(PersonNamedEvent), PersonNamedEvent},
@@ -18,9 +18,13 @@ namespace domain
             {typeof(PersonFinishedExperienceEvent), PersonFinishedExperienceEvent}
         };
 
-        public Person()
+        public Person(Guid id) : base(id, Actions)
         {
-            base.Actions = Actions;
+        }
+
+        public static Person Create()
+        {
+            return new Person(Guid.NewGuid());
         }
 
         private static void PersonBornEvent(Event @event, object @object)
