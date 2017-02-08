@@ -44,7 +44,7 @@ namespace domain.Infrastructure
             return eventSourced;
         }
 
-        protected static void ValidateVersionFor(EventSourced source, Command command)
+        protected static void Validate(EventSourced source, Command command)
         {
             if (command.EventSourcedId != source.Id)
             {

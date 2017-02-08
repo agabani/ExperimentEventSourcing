@@ -11,14 +11,14 @@ namespace domain
     {
         public IEnumerable<VersionedEvent> Execute(BirthedCommand command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             return new[] {new PersonBornEvent(Id, command.When, Version, command.Gender)};
         }
 
         public IEnumerable<VersionedEvent> Execute(ChangeNameCommand command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             Func<DateTime, DateTime> eighteen = dateOfBirth => new DateTime(dateOfBirth.Year + 18, dateOfBirth.Month, dateOfBirth.Day);
 
@@ -34,7 +34,7 @@ namespace domain
 
         public IEnumerable<VersionedEvent> Execute(StartEducation command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             if (EducationalHistory.Any(e => e.InstitutionName == command.InstitutionName
                                             && e.EndDate == null))
@@ -47,7 +47,7 @@ namespace domain
 
         public IEnumerable<VersionedEvent> Execute(FinishEducation command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             var education = EducationalHistory
                 .SingleOrDefault(e => e.InstitutionName == command.InstitutionName
@@ -63,7 +63,7 @@ namespace domain
 
         public IEnumerable<VersionedEvent> Execute(StartExperience command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             var experience = ExperienceHistory.SingleOrDefault(e => e.InstitutionName == command.InstitutionName && e.EndDate == null);
 
@@ -77,7 +77,7 @@ namespace domain
 
         public IEnumerable<VersionedEvent> Execute(FinishExperience command)
         {
-            ValidateVersionFor(this, command);
+            Validate(this, command);
 
             var experience = ExperienceHistory
                 .SingleOrDefault(e => e.InstitutionName == command.InstitutionName

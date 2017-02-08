@@ -42,9 +42,9 @@ namespace domain.Infrastructure
             return versionedEventSourced;
         }
 
-        protected static void ValidateVersionFor(VersionedEventSourced source, VersionedCommand command)
+        protected static void Validate(VersionedEventSourced source, VersionedCommand command)
         {
-            EventSourced.ValidateVersionFor(source, command);
+            EventSourced.Validate(source, command);
 
             if (command.Version != source.Version)
             {
